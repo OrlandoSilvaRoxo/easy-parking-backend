@@ -11,18 +11,18 @@ import java.util.List;
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    public String username;
 
     @Column(name = "password", nullable = false)
-    private String password;
+    public String password;
 
     @Column(name = "email", nullable = false, unique = true)
-    private String email;
+    public String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CarEntity> cars;
+    public List<CarEntity> cars;
 
 }

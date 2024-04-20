@@ -13,14 +13,14 @@ import java.time.LocalDateTime;
 public class ParkingSpaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
     @Column(name = "location_description", nullable = false)
-    private String locationDescription;
+    public String locationDescription;
 
     @Column(name = "is_occupied", nullable = false)
-    private boolean isOccupied;
+    public boolean isOccupied;
 
     @Column(name = "occupy_time")
-    private LocalDateTime occupyTime;
+    public LocalDateTime occupyTime;
 }
