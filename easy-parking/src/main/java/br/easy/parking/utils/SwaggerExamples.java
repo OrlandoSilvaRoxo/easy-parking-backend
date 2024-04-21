@@ -18,4 +18,22 @@ public class SwaggerExamples {
       		</body>
       	</html>
       """;
+
+    public static final String CREATECAREXAMPLE = """
+            {
+              "id": 1,
+              "licensePlate": "ABC-1234",
+              "user": {
+                "id": 10,
+                "username": "john_doe",
+                "email": "john@example.com",
+                "password": "encrypted_password"
+              },
+              "make": "Toyota",
+              "model": "Corolla",
+              "color": "Blue",
+              "parkingTime": "2024-04-15T14:30:00"
+            }
+                  
+      """;
 }

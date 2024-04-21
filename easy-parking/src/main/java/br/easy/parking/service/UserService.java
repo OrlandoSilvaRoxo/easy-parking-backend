@@ -1,5 +1,6 @@
 package br.easy.parking.service;
 
+import br.easy.parking.model.UserModel;
 import br.easy.parking.repository.UserRepository;
 import br.easy.parking.repository.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserEntity createUser(UserEntity userEntity) {
+    public UserEntity createUser(UserModel userModel) {
+        UserEntity userEntity = new UserEntity(userModel);
         return userRepository.createUser(userEntity);
     }
 

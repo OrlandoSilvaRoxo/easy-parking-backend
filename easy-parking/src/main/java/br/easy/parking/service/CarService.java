@@ -1,7 +1,10 @@
 package br.easy.parking.service;
 
+import br.easy.parking.model.CarModel;
 import br.easy.parking.repository.CarRepository;
+import br.easy.parking.repository.UserRepository;
 import br.easy.parking.repository.entity.CarEntity;
+import br.easy.parking.repository.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,13 @@ public class CarService {
     @Autowired
     private CarRepository carRepository;
 
-    public CarEntity createCar(CarEntity carEntity) {
+    @Autowired
+    private UserRepository userRepository;
+
+    public CarEntity createCar(CarModel carModel) {
+        UserEntity userEntity = userRepository.findUserById(carModel.id);
+        CarEntity carEntity = new CarEntity(carModel, userEntity);
+
         return carRepository.createCar(carEntity);
     }
 

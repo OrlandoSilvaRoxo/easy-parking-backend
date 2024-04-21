@@ -1,5 +1,7 @@
 package br.easy.parking.repository.entity;
 
+import br.easy.parking.model.CarModel;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -32,4 +34,16 @@ public class CarEntity {
     @Column(name = "parking_time")
     public LocalDateTime parkingTime;
 
+    public CarEntity(CarModel carModel, UserEntity userEntity) {
+        this.licensePlate = carModel.licensePlate;
+        this.user = userEntity;
+        this.make = carModel.make;
+        this.model = carModel.model;
+        this.color = carModel.color;
+        this.parkingTime = carModel.parkingTime;
+    }
+
+    public CarEntity() {
+
+    }
 }

@@ -40,4 +40,6 @@ public class UserRepository {
     public List<UserEntity> findAllUsers() {
         return iUserRepository.findAll();
     }
+
+    public UserEntity findUserById(Long id) {return iUserRepository.getById(id);}
 }

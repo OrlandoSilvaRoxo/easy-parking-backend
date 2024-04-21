@@ -1,5 +1,7 @@
 package br.easy.parking.repository.entity;
 
+import br.easy.parking.model.UserModel;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,6 +11,14 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class UserEntity {
+
+    public UserEntity(UserModel userModel){
+        id = userModel.id;
+        username = userModel.username;
+        password = userModel.password;
+        email = userModel.email;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
@@ -25,4 +35,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     public List<CarEntity> cars;
 
+    public UserEntity() {
+
+    }
 }
