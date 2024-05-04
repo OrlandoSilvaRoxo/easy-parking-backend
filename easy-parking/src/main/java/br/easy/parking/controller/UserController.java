@@ -1,12 +1,20 @@
 package br.easy.parking.controller;
 
 import br.easy.parking.model.UserModel;
+import br.easy.parking.utils.SwaggerExamples;
 import br.easy.parking.repository.entity.UserEntity;
 import br.easy.parking.service.UserService;
+import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import kong.unirest.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Content;
 
 @RestController
 @RequestMapping("/user")
@@ -15,34 +23,43 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping
-    public UserEntity createUser(@RequestBody UserModel userModel) {
-        return userService.createUser(userModel);
+    @ApiOperation(value = "Cria um usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = String.class),
+                    examples = {@ExampleObject(value = SwaggerExamples.POSTREGISTER)})
+            ),
+            @ApiResponse(responseCode = "201", description = "Status não utilizado"),
+            @ApiResponse(responseCode = "401", description = "Status não utilizado."),
+            @ApiResponse(responseCode = "403", description = "Status não utilizado."),
+            @ApiResponse(responseCode = "400", description = "Corpo do json mal formado ou horário inválido"),
+            @ApiResponse(responseCode = "500", description = "Erro interno na requisição")})
+    @PostMapping(value = "/create/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createUser(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do cadastro de usuário", example = SwaggerExamples.POSTREGISTER) @RequestBody String requestBody) {
+        JSONObject requestBodyJson = new JSONObject(requestBody);
+        UserModel userModel = new UserModel(requestBodyJson);
+        userService.createUser(userModel);
     }
 
-    @GetMapping("/username/{username}")
-    public UserEntity getUserByUsername(@PathVariable String username) {
-        return userService.getUserByUsername(username);
-    }
-
-    @GetMapping("/email/{email}")
-    public UserEntity getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
-    }
-
-    @PutMapping("/{id}")
-    public UserEntity updateUser(@PathVariable Long id, @RequestBody UserEntity userEntity) {
-        return userService.updateUser(id, userEntity);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-    }
-
-    @GetMapping
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
+    @ApiOperation(value = "Loga um usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = String.class),
+                    examples = {@ExampleObject(value = SwaggerExamples.POSTLOGIN)})
+            ),
+            @ApiResponse(responseCode = "201", description = "Status não utilizado"),
+            @ApiResponse(responseCode = "401", description = "Status não utilizado."),
+            @ApiResponse(responseCode = "403", description = "Status não utilizado."),
+            @ApiResponse(responseCode = "400", description = "Corpo do json mal formado ou horário inválido"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno na requisição")})
+    @PostMapping(value = "/login/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean Login(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do login", example = SwaggerExamples.POSTLOGIN) @RequestBody String requestBody) {
+        JSONObject requestBodyJson = new JSONObject(requestBody);
+        UserModel userModel = new UserModel(requestBodyJson);
+        return userService.login(userModel);
     }
 }
 

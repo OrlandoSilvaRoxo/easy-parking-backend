@@ -14,28 +14,16 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserEntity createUser(UserModel userModel) {
+    public void createUser(UserModel userModel) {
         UserEntity userEntity = new UserEntity(userModel);
-        return userRepository.createUser(userEntity);
+        userRepository.createUser(userEntity);
     }
 
-    public UserEntity getUserByUsername(String username) {
-        return userRepository.findUserByUsername(username);
-    }
-
-    public UserEntity getUserByEmail(String email) {
-        return userRepository.findUserByEmail(email);
-    }
-
-    public UserEntity updateUser(Long id, UserEntity userEntity) {
-        return userRepository.updateUser(id, userEntity);
-    }
-
-    public void deleteUser(Long id) {
-        userRepository.deleteUser(id);
-    }
-
-    public List<UserEntity> getAllUsers() {
-        return userRepository.findAllUsers();
+    public boolean login(UserModel userModel) {
+        UserEntity userEntity = userRepository.findUserByEmail(userModel.email);
+        if (userEntity != null){
+            return true;
+        }
+        return false;
     }
 }

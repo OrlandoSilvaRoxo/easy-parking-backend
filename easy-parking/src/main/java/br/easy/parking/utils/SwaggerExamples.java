@@ -19,21 +19,20 @@ public class SwaggerExamples {
       	</html>
       """;
 
-    public static final String CREATECAREXAMPLE = """
-            {
-              "id": 1,
-              "licensePlate": "ABC-1234",
-              "user": {
-                "id": 10,
-                "username": "john_doe",
+    public static final String POSTLOGIN = """
+              }
                 "email": "john@example.com",
                 "password": "encrypted_password"
-              },
-              "make": "Toyota",
-              "model": "Corolla",
-              "color": "Blue",
-              "parkingTime": "2024-04-15T14:30:00"
-            }
-                  
-      """;
+              }
+            """;
+    public static final String POSTREGISTER = """
+                {
+                  "name": "John",
+                  "lastName": "Cury",
+                  "phone": "47475457674",
+                  "plate": "CBX56789",
+                  "email": "john@example.com",
+                  "password": "encrypted_password"
+                }
+            """;
 }
