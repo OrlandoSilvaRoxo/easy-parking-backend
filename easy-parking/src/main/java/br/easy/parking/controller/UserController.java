@@ -34,13 +34,14 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "Status não utilizado"),
             @ApiResponse(responseCode = "401", description = "Status não utilizado."),
             @ApiResponse(responseCode = "403", description = "Status não utilizado."),
-            @ApiResponse(responseCode = "400", description = "Corpo do json mal formado ou horário inválido"),
+            @ApiResponse(responseCode = "400", description = "Corpo do json mal formado ou inválido"),
             @ApiResponse(responseCode = "500", description = "Erro interno na requisição")})
     @PostMapping(value = "/create/", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createUser(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do cadastro de usuário", example = SwaggerExamples.POSTREGISTER) @RequestBody String requestBody) {
+    public boolean createUser(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do cadastro de usuário", example = SwaggerExamples.POSTREGISTER) @RequestBody String requestBody) {
         JSONObject requestBodyJson = new JSONObject(requestBody);
         UserModel userModel = new UserModel(requestBodyJson);
-        userService.createUser(userModel);
+        boolean hasCreated = userService.createUser(userModel);
+        return hasCreated;
     }
 
     @CrossOrigin
@@ -60,7 +61,7 @@ public class UserController {
     @PostMapping(value = "/login/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean Login(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do login", example = SwaggerExamples.POSTLOGIN) @RequestBody String requestBody) {
         JSONObject requestBodyJson = new JSONObject(requestBody);
-        return userService.login(requestBodyJson.getString("email"));
+        return userService.login(requestBodyJson.getString("email"), requestBodyJson.getString("password"));
     }
 }
 

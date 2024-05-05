@@ -6,22 +6,25 @@ import br.easy.parking.repository.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    public void createUser(UserModel userModel) {
+    public boolean createUser(UserModel userModel) {
         UserEntity userEntity = new UserEntity(userModel);
-        userRepository.createUser(userEntity);
+        try {
+            userRepository.createUser(userEntity);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public boolean login(String email) {
+    public boolean login(String email, String password) {
         UserEntity userEntity = userRepository.findUserByEmail(email);
-        if (userEntity != null){
+        if (userEntity != null && userEntity.password.equals(password)){
             return true;
         }
         return false;
