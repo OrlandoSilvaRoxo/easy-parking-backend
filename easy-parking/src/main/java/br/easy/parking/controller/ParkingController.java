@@ -25,11 +25,7 @@ public class ParkingController {
     @CrossOrigin
     @ApiOperation(value = "Cria um estacionamento.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = String.class),
-                    examples = {@ExampleObject(value = SwaggerExamples.POSTREGISTER)})
-            ),
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida"),
             @ApiResponse(responseCode = "201", description = "Status não utilizado"),
             @ApiResponse(responseCode = "401", description = "Status não utilizado."),
             @ApiResponse(responseCode = "403", description = "Status não utilizado."),
@@ -42,11 +38,7 @@ public class ParkingController {
     @CrossOrigin
     @ApiOperation(value = "Retorna todos os estacionamentos.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = ParkingEntity.class),
-                    examples = {@ExampleObject(value = "{'id': 1, 'occupied': false}, {'id': 2, 'occupied': true}")})
-            ),
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida"),
             @ApiResponse(responseCode = "201", description = "Status não utilizado"),
             @ApiResponse(responseCode = "401", description = "Status não utilizado."),
             @ApiResponse(responseCode = "403", description = "Status não utilizado."),
@@ -60,11 +52,7 @@ public class ParkingController {
     @CrossOrigin
     @ApiOperation(value = "Ocupa um estacionamento.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(implementation = ParkingEntity.class),
-                    examples = {@ExampleObject(value = "{'id': 1, 'occupied': false}, {'id': 2, 'occupied': true}")})
-            ),
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida"),
             @ApiResponse(responseCode = "201", description = "Status não utilizado"),
             @ApiResponse(responseCode = "401", description = "Status não utilizado."),
             @ApiResponse(responseCode = "403", description = "Status não utilizado."),
