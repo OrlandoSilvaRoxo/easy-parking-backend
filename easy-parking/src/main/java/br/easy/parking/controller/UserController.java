@@ -23,6 +23,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @CrossOrigin
     @ApiOperation(value = "Cria um usuário.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
@@ -42,6 +43,7 @@ public class UserController {
         userService.createUser(userModel);
     }
 
+    @CrossOrigin
     @ApiOperation(value = "Loga um usuário.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida", content = @Content(
@@ -58,8 +60,7 @@ public class UserController {
     @PostMapping(value = "/login/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public boolean Login(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do login", example = SwaggerExamples.POSTLOGIN) @RequestBody String requestBody) {
         JSONObject requestBodyJson = new JSONObject(requestBody);
-        UserModel userModel = new UserModel(requestBodyJson);
-        return userService.login(userModel);
+        return userService.login(requestBodyJson.getString("email"));
     }
 }
 

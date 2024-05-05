@@ -12,7 +12,7 @@ public class UserRepository {
     private IUserRepository iUserRepository;
 
     public void createUser(UserEntity userEntity) {
-        iUserRepository.save(userEntity);
+        iUserRepository.insertUser(userEntity.name, userEntity.lastName, userEntity.phone, userEntity.plate, userEntity.email, userEntity.password);
     }
 
     public UserEntity findUserByEmail(String email) {

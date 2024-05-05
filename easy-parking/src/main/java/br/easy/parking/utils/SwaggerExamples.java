@@ -20,7 +20,7 @@ public class SwaggerExamples {
       """;
 
     public static final String POSTLOGIN = """
-              }
+              {
                 "email": "john@example.com",
                 "password": "encrypted_password"
               }

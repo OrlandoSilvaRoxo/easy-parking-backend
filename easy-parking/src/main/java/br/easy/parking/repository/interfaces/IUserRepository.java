@@ -15,11 +15,12 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
     @Query("SELECT u FROM UserEntity u WHERE u.email = ?1")
     UserEntity findByEmail(String email);
 
+
     /**
      * Insere um novo usuário no banco de dados utilizando uma consulta SQL nativa.
      */
-    @Transactional
     @Modifying
-    @Query(value = "INSERT INTO user (name, last_name, phone, plate, email, password) VALUES (?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
+    @Transactional
+    @Query(value = "INSERT INTO my_user (name, last_name, phone, plate, email, password) VALUES (?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
     void insertUser(String name, String lastName, String phone, String plate, String email, String password);
 }

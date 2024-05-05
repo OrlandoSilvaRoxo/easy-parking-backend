@@ -19,8 +19,8 @@ public class UserService {
         userRepository.createUser(userEntity);
     }
 
-    public boolean login(UserModel userModel) {
-        UserEntity userEntity = userRepository.findUserByEmail(userModel.email);
+    public boolean login(String email) {
+        UserEntity userEntity = userRepository.findUserByEmail(email);
         if (userEntity != null){
             return true;
         }
