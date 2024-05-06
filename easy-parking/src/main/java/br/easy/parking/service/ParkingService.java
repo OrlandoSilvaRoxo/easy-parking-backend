@@ -1,5 +1,6 @@
 package br.easy.parking.service;
 
+import br.easy.parking.model.ParkingModel;
 import br.easy.parking.repository.ParkingRepository;
 import br.easy.parking.repository.entity.ParkingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class ParkingService {
         return parkingRepository.getAllParkings(); // Retorna todos os estacionamentos cadastrados no banco de dados.
     }
 
-    public boolean occupyParking(Long parkingId) {
-        return parkingRepository.occupyAParkingSlot(parkingId);
+    public boolean occupyParking(ParkingModel parkingModel) {
+        return parkingRepository.occupyAParkingSlot(parkingModel);
     }
 
     public boolean freeParking(Long parkingId) {

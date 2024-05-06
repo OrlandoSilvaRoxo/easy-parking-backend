@@ -35,4 +35,12 @@ public class SwaggerExamples {
                   "password": "encrypted_password"
                 }
             """;
+    public static final String POSTOCCUPY = """
+                {
+                  "id": "1",
+                  "plate": "CBX56789",
+                  "startTime": "2023-10-01T15:00:00.000Z",
+                  "endTime": "2023-10-01T17:00:00.000Z",
+                }
+            """;
 }

@@ -1,5 +1,6 @@
 package br.easy.parking.repository;
 
+import br.easy.parking.model.ParkingModel;
 import br.easy.parking.repository.entity.ParkingEntity;
 import br.easy.parking.repository.interfaces.IParkingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class ParkingRepository {
         return iParkingRepository.findAll(); // Retorna todos os estacionamentos cadastrados no banco de dados.
     }
 
-    public boolean occupyAParkingSlot(Long parkingId) {
+    public boolean occupyAParkingSlot(ParkingModel parkingModel) {
         try {
-            iParkingRepository.occupyParking(parkingId);
+            iParkingRepository.occupyParking(Long.parseLong(parkingModel.id), parkingModel.plate, parkingModel.startTime, parkingModel.endTime);
             return true;
         } catch (Exception e) {
             System.out.println("Falha ao inserir a vaga de estacionamento: " + e.getMessage());

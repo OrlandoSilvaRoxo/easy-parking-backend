@@ -1,15 +1,19 @@
 package br.easy.parking.controller;
 
+import br.easy.parking.model.ParkingModel;
+import br.easy.parking.model.UserModel;
 import br.easy.parking.repository.entity.ParkingEntity;
 import br.easy.parking.service.ParkingService;
 import br.easy.parking.utils.SwaggerExamples;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import kong.unirest.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +62,12 @@ public class ParkingController {
             @ApiResponse(responseCode = "403", description = "Status não utilizado."),
             @ApiResponse(responseCode = "400", description = "Corpo do json mal formado inválido"),
             @ApiResponse(responseCode = "500", description = "Erro interno na requisição")})
-    @GetMapping(value = "/occupy/")
-    public boolean occupyParking(@Parameter(description = "Id da vaga", example = "1") @RequestParam String id) {
-        return parkingService.occupyParking(Long.valueOf(id));
+    @PostMapping(value = "/occupy/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public boolean occupyParking(@ApiParam(name = "requestBody", type = MediaType.APPLICATION_JSON_VALUE, value = "Corpo do cadastro de usuário", example = SwaggerExamples.POSTOCCUPY) @RequestBody String requestBody) {
+        JSONObject requestBodyJson = new JSONObject(requestBody);
+        ParkingModel parkingModel = new ParkingModel(requestBodyJson);
+        boolean hasOccupied = parkingService.occupyParking(parkingModel);
+        return hasOccupied;
     }
 
     @CrossOrigin
