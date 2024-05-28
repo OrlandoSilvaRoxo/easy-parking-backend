@@ -24,4 +24,9 @@ public interface IParkingRepository extends JpaRepository<ParkingEntity, Long> {
     @Transactional
     @Query(value = "UPDATE parking SET occupied = true, plate = ?2, start_time = ?3, end_time = ?4 WHERE id = ?1", nativeQuery = true)
     void occupyParking(Long id, String plate, LocalDateTime startTime, LocalDateTime endTime);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM parking WHERE id = ?1", nativeQuery = true)
+    void deleteParking(Long id);
 }

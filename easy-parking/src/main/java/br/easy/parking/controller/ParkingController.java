@@ -87,4 +87,17 @@ public class ParkingController {
     public boolean freeParking(@Parameter(description = "Id da vaga", example = "1") @RequestParam String id) {
         return parkingService.freeParking(Long.valueOf(id));
     }
+
+    @CrossOrigin
+    @ApiOperation(value = "Deleta um estacionamento.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Requisição bem-sucedida"),
+            @ApiResponse(responseCode = "201", description = "Status não utilizado"),
+            @ApiResponse(responseCode = "401", description = "Status não utilizado."),
+            @ApiResponse(responseCode = "403", description = "Status não utilizado."),
+            @ApiResponse(responseCode = "500", description = "Erro interno na requisição")})
+    @DeleteMapping(value = "/delete/")
+    public boolean deleteParking(@Parameter(description = "Id da vaga", example = "1") @RequestParam Long id) {
+        return parkingService.deleteParking(id);
+    }
 }

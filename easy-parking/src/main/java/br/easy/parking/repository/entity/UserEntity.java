@@ -43,6 +43,8 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     public String password;
 
+    @Column(name = "isAdmin", nullable = false)
+    public boolean isAdmin;
 
     public UserEntity() {
 

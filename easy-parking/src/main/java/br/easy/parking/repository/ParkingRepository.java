@@ -32,7 +32,7 @@ public class ParkingRepository {
             iParkingRepository.occupyParking(Long.parseLong(parkingModel.id), parkingModel.plate, parkingModel.startTime, parkingModel.endTime);
             return true;
         } catch (Exception e) {
-            System.out.println("Falha ao inserir a vaga de estacionamento: " + e.getMessage());
+            System.out.println("Falha ao ocupar a vaga de estacionamento: " + e.getMessage());
             return false;
         }
     }
@@ -42,7 +42,17 @@ public class ParkingRepository {
             iParkingRepository.freeParking(parkingId);
             return true;
         } catch (Exception e) {
-            System.out.println("Falha ao inserir a vaga de estacionamento: " + e.getMessage());
+            System.out.println("Falha ao liberar a vaga de estacionamento: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteParking(Long id) {
+        try {
+            iParkingRepository.deleteParking(id);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Falha ao deletar a vaga de estacionamento: " + e.getMessage());
             return false;
         }
     }

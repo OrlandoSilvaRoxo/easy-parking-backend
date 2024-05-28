@@ -33,4 +33,8 @@ public class ParkingService {
     public boolean freeParking(Long parkingId) {
         return parkingRepository.freeAParkingSlot(parkingId);
     }
+
+    public boolean deleteParking(Long id) {
+        return parkingRepository.deleteParking(id);
+    }
 }
